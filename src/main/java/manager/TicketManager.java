@@ -1,9 +1,11 @@
 package manager;
 
 import domain.InfoTicket;
+import domain.TicketByTimeAscComparator;
 import repository.TicketRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketManager {
     private TicketRepository ticketRepository;
@@ -31,6 +33,29 @@ public class TicketManager {
         }
 
         Arrays.sort(filteredTickets);
+
+        return filteredTickets;
+    }
+
+    public InfoTicket[] findAll(String from, String to, Comparator<InfoTicket> comparator) {
+        InfoTicket[] allTickets = ticketRepository.getAll();
+        InfoTicket[] filteredTickets = new InfoTicket[0];
+
+        for (InfoTicket ticket : allTickets) {
+            if (ticket.getFrom() == from && ticket.getTo() == to) {
+                int length = filteredTickets.length + 1;
+                InfoTicket[] tmp = new InfoTicket[length];
+
+                System.arraycopy(filteredTickets, 0, tmp, 0, filteredTickets.length);
+
+                int lastIndex = tmp.length - 1;
+                tmp[lastIndex] = ticket;
+
+                filteredTickets = tmp;
+            }
+        }
+
+        Arrays.sort(filteredTickets, comparator);
 
         return filteredTickets;
     }
