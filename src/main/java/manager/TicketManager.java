@@ -1,7 +1,6 @@
 package manager;
 
 import domain.InfoTicket;
-import domain.TicketByTimeAscComparator;
 import repository.TicketRepository;
 
 import java.util.Arrays;
@@ -19,7 +18,7 @@ public class TicketManager {
         InfoTicket[] filteredTickets = new InfoTicket[0];
 
         for (InfoTicket ticket : allTickets) {
-            if (ticket.getFrom() == from && ticket.getTo() == to) {
+            if (ticket.getFrom().equalsIgnoreCase(from) && ticket.getTo().equalsIgnoreCase(to)) {
                 int length = filteredTickets.length + 1;
                 InfoTicket[] tmp = new InfoTicket[length];
 
@@ -42,7 +41,7 @@ public class TicketManager {
         InfoTicket[] filteredTickets = new InfoTicket[0];
 
         for (InfoTicket ticket : allTickets) {
-            if (ticket.getFrom() == from && ticket.getTo() == to) {
+            if (ticket.getFrom().equalsIgnoreCase(from) && ticket.getTo().equalsIgnoreCase(to)) {
                 int length = filteredTickets.length + 1;
                 InfoTicket[] tmp = new InfoTicket[length];
 

@@ -1,11 +1,12 @@
 package manager;
 
 import domain.InfoTicket;
-import domain.TicketByTimeAscComparator;
+import domain.TicketByFlightTimeAscComparator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.TicketRepository;
 
+import java.time.Duration;
 import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,14 +28,14 @@ class TicketManagerTest {
 
     @BeforeEach
     void setUp() {
-        firstTicket = new InfoTicket(1, 245, "DME", "EGO", 180);
-        secondTicket = new InfoTicket(2, 4587, "DME", "EGO", 400);
-        thirdTicket = new InfoTicket(3, 2176, "ABG", "EGO", 600);
-        fourthTicket = new InfoTicket(4, 1000, "DME", "EGO", 160);
-        fifthTicket = new InfoTicket(5, 10000, "ABR", "EGO", 180);
-        sixthTicket = new InfoTicket(6, 50576, "EGO", "ABR", 180);
-        seventhTicket = new InfoTicket(7, 100, "DME", "EGO", 60);
-        eighthTicket = new InfoTicket(8, 10, "EGO", "ABR", 80);
+        firstTicket = new InfoTicket(1, 245, "DME", "EGO", Duration.ofMinutes(180));
+        secondTicket = new InfoTicket(2, 4587, "DME", "EGO", Duration.ofMinutes(400));
+        thirdTicket = new InfoTicket(3, 2176, "ABG", "EGO", Duration.ofMinutes(600));
+        fourthTicket = new InfoTicket(4, 1000, "DME", "EGO", Duration.ofMinutes(160));
+        fifthTicket = new InfoTicket(5, 10000, "ABR", "EGO", Duration.ofMinutes(180));
+        sixthTicket = new InfoTicket(6, 50576, "EGO", "ABR", Duration.ofMinutes(180));
+        seventhTicket = new InfoTicket(7, 100, "DME", "EGO", Duration.ofMinutes(60));
+        eighthTicket = new InfoTicket(8, 10, "EGO", "ABR", Duration.ofMinutes(80));
 
         repository = new TicketRepository();
         manager = new TicketManager(repository);
@@ -48,7 +49,7 @@ class TicketManagerTest {
         repository.save(seventhTicket);
         repository.save(eighthTicket);
 
-        comparator = new TicketByTimeAscComparator();
+        comparator = new TicketByFlightTimeAscComparator();
     }
 
     @Test
@@ -64,7 +65,7 @@ class TicketManagerTest {
         TicketRepository repository = new TicketRepository();
         TicketManager manager = new TicketManager(repository);
 
-        InfoTicket ticket = new InfoTicket(3, 2176, "ABG", "EGO", 180);
+        InfoTicket ticket = new InfoTicket(3, 2176, "ABG", "EGO", Duration.ofMinutes(180));
 
         repository.save(ticket);
 
@@ -114,7 +115,7 @@ class TicketManagerTest {
         TicketRepository repository = new TicketRepository();
         TicketManager manager = new TicketManager(repository);
 
-        InfoTicket ticket = new InfoTicket(3, 2176, "ABG", "EGO", 180);
+        InfoTicket ticket = new InfoTicket(3, 2176, "ABG", "EGO", Duration.ofMinutes(180));
 
         repository.save(ticket);
 
